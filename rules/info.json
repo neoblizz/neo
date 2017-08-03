@@ -1,0 +1,9 @@
+{
+	    "AUTHOR" : "Neoblizz",
+	    "SHORT" : "Adding rules to TeamUndead.",
+	    "DESCRIPTION" : "Uses embed to display rules nicely.",
+	    "DISABLED" : false,
+	    "NAME" : "Rules",
+	    "TAGS" : ["rules"],
+	    "INSTALL_MSG" : "You just installed **Rules.py**! \n"
+}
