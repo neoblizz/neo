@@ -1,0 +1,9 @@
+{
+	    "AUTHOR" : "Neoblizz",
+	    "SHORT" : "Twitch shoutouts.",
+	    "DESCRIPTION" : "Shoutout your twitch channels.",
+	    "DISABLED" : false,
+	    "NAME" : "Shoutout",
+	    "TAGS" : ["shoutout"],
+	    "INSTALL_MSG" : "`[p]shoutout neoblizz` \nYou just installed **Shoutout.py**! \n"
+}
