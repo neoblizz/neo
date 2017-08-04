@@ -25,18 +25,18 @@ class Shoutout:
         """Shoutout"""
         
         username = twitch
-        bash = "./kraken.sh %s > kraken.log" % username
+        bash = "./kraken.sh %s > kraken.log" % twitch
         process = subprocess.Popen(bash.split(), stdout=subprocess.PIPE)
         output, error = process.communicate()
         data = json.loads(output.decode("utf-8"))
         logo = data["users"][0]["logo"]
         bio = data["users"][0]["bio"]
         auth = ctx.message.author
-        data = discord.Embed(colour=discord.Colour(0x942be2), url=username, description="Twitch profile.")
-        data.set_thumbnail(url=logo)
-        data.set_author(name=username, url=username)
-        data.add_field(name="Biography", value=bio) 
-        await self.bot.say(embed=data)
+        # data = discord.Embed(colour=discord.Colour(0x942be2), url=username, description="Twitch profile.")
+        # data.set_thumbnail(url=logo)
+        # data.set_author(name=username, url=username)
+        # data.add_field(name="Biography", value=bio) 
+        # await self.bot.say(embed=data)
 
 def setup(bot):
     bot.add_cog(Shoutout(bot))
