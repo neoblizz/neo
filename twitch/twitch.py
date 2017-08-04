@@ -30,10 +30,10 @@ class Shoutout:
         output, error = process.communicate()
         data = json.loads(output.decode("utf-8"))
         auth = ctx.message.author
-        data = discord.Embed(colour=discord.Colour(0x942be2), url="https://twitch.tv/", description="A")
-        data.set_thumbnail(url="https://static-cdn.jtvnw.net/jtv_user_pictures/neoblizz-profile_image-8db895b58f67bd79-300x300.jpeg")
-        data.set_author(name="NeoBlizz", url="https://discordapp.com")
-        data.add_field(name="Aasdfasdf", value="Aasdfasdf")
+        data = discord.Embed(colour=discord.Colour(0x942be2), url="https://twitch.tv/%s" % data["users"][0]["name"], description="Twitch profile.")
+        data.set_thumbnail(url=data["users"][0]["logo"])
+        data.set_author(name=data["users"][0]["name"], url="https://twitch.tv/%s" % data["users"][0]["name"])
+        data.add_field(name="Biography", value=data["users"][0]["bio"])
         
         await self.bot.say(embed=data)
 
