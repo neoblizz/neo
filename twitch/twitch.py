@@ -36,11 +36,11 @@ class Shoutout:
         pprint(bio)
         pprint(twitch)
         pprint(username)
-        # data = discord.Embed(colour=discord.Colour(0x942be2), url=username, description="Twitch profile.")
-        # data.set_thumbnail(url=logo)
-        # data.set_author(name=username, url=username)
-        # data.add_field(name="Biography", value=bio) 
-        # await self.bot.say(embed=data)
+        card = discord.Embed(colour=discord.Colour(0x942be2), url=username, description="Twitch profile.")
+        card.set_thumbnail(url=logo)
+        card.set_author(name=username, url=username)
+        card.add_field(name="Biography", value=bio) 
+        await self.bot.say(embed=card)
 
 def setup(bot):
     bot.add_cog(Shoutout(bot))
