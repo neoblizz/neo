@@ -32,6 +32,10 @@ class Shoutout:
         logo = data["users"][0]["logo"]
         bio = data["users"][0]["bio"]
         auth = ctx.message.author
+        pprint(logo)
+        pprint(bio)
+        pprint(twitch)
+        pprint(username)
         # data = discord.Embed(colour=discord.Colour(0x942be2), url=username, description="Twitch profile.")
         # data.set_thumbnail(url=logo)
         # data.set_author(name=username, url=username)
