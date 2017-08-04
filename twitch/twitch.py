@@ -29,8 +29,8 @@ class Shoutout:
         process = subprocess.Popen(bash.split(), stdout=subprocess.PIPE)
         output, error = process.communicate()
         data = json.loads(output.decode("utf-8"))
-        logo = data["users"][0]["logo"].decode("utf-8")
-        bio = data["users"][0]["bio"].decode("utf-8")
+        logo = data["users"][0]["logo"]
+        bio = data["users"][0]["bio"]
         
         auth = ctx.message.author
         data = discord.Embed(colour=discord.Colour(0x942be2), url=username, description="Twitch profile.")
