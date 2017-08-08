@@ -41,6 +41,8 @@ class Overwatch:
                 return
             fetch = await self.bot.send_message(m.channel, "Fetching player data for " + username + "..."
                                                 + "\n*(This may take awhile)*")
+            owapicall = url + user + "/" + "stats" + "?" + "platform=" + platform
+            print "OW API INVOKED: %s" % owapicall
             async with session.get(url + user + "/" + "stats" + "?" + "platform=" + platform) as us:
                 self.api = await us.json()
                 if 'data' in self.api:
