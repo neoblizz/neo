@@ -71,12 +71,12 @@ class Overwatch:
     async def stats(self, ctx, username, platform):
         m = ctx.message
         data = self.api['data']
-        qp = "Wins - " + str(data['any']['stats']['quickplay']['overall_stats'].get('wins', [])) \
-             + "\nLost - " + str(data['any']['stats']['quickplay']['overall_stats'].get('losses', [])) \
-             + "\nPlayed - " + str(data['any']['stats']['quickplay']['overall_stats'].get('games', []))\
-        comp = "Wins - " + str(data['any']['stats']['quickplay']['overall_stats'].get('wins', [])) \
-             + "\nLost - " + str(data['any']['stats']['quickplay']['overall_stats'].get('losses', [])) \
-             + "\nPlayed - " + str(data['any']['stats']['quickplay']['overall_stats'].get('games', [])) \
+        qp = "Wins - " + str(data['any']['stats']['quickplay']['overall_stats'].get('wins', []))\
+             + "\nLost - " + str(data['any']['stats']['quickplay']['overall_stats'].get('losses', []))\
+             + "\nPlayed - " + str(data['any']['stats']['quickplay']['overall_stats'].get('games', []))
+        comp = "Wins - " + str(data['any']['stats']['quickplay']['overall_stats'].get('wins', []))\
+               + "\nLost - " + str(data['any']['stats']['quickplay']['overall_stats'].get('losses', []))\
+               + "\nPlayed - " + str(data['any']['stats']['quickplay']['overall_stats'].get('games', []))
         em = discord.Embed(title="Overwatch Stats on " + platform.upper(),
                            colour=randint(0, 0xFFFFFF),
                            description="Level " + str(data['any']['stats']['quickplay']['overall_stats']['level']))
