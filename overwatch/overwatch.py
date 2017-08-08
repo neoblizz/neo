@@ -81,7 +81,7 @@ class Overwatch:
                + "\nPlayed - " + str(data['stats']['competitive']['overall_stats'].get('games', []))
         em = discord.Embed(title="Overwatch Stats on " + platform.upper(),
                            colour=randint(0, 0xFFFFFF),
-                           description="Level " + str(data['stats']['quickplay']['overall_stats']['prestige'])) + str(data['stats']['quickplay']['overall_stats']['level']))
+                           description="Level " + str(data['stats']['quickplay']['overall_stats']['prestige']) + str(data['stats']['quickplay']['overall_stats']['level']))
         em.set_thumbnail(url=str(data['stats']['quickplay']['overall_stats']['avatar']))
         em.set_author(name=username)
         em.set_footer(text="Git Gud~")
