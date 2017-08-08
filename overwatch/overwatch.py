@@ -76,12 +76,13 @@ class Overwatch:
         qp = "Wins - " + str(data['stats']['quickplay']['overall_stats'].get('wins', []))\
              + "\nLost - " + str(data['stats']['quickplay']['overall_stats'].get('losses', []))\
              + "\nPlayed - " + str(data['stats']['quickplay']['overall_stats'].get('games', []))
-        comp = "Wins - " + str(data['stats']['competitive']['overall_stats'].get('wins', []))\
+        comp = "SR - " + str(data['stats']['competitive']['overall_stats'].get('comprank', []))\
+               + "Wins - " + str(data['stats']['competitive']['overall_stats'].get('wins', []))\
                + "\nLost - " + str(data['stats']['competitive']['overall_stats'].get('losses', []))\
                + "\nPlayed - " + str(data['stats']['competitive']['overall_stats'].get('games', []))
         em = discord.Embed(title="Overwatch Stats on " + platform.upper(),
                            colour=randint(0, 0xFFFFFF),
-                           description="Level " + str(data['stats']['quickplay']['overall_stats']['prestige']) + str(data['stats']['quickplay']['overall_stats']['level']))
+                           description="Rank " + str(data['stats']['quickplay']['overall_stats']['tier']) + " - Level " + str(data['stats']['quickplay']['overall_stats']['prestige']) + str(data['stats']['quickplay']['overall_stats']['level']))
         em.set_thumbnail(url=str(data['stats']['quickplay']['overall_stats']['avatar']))
         em.set_author(name=username)
         em.set_footer(text="Git Gud~")
