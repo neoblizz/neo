@@ -43,10 +43,11 @@ class Overwatch:
             owapicall = url + user + "/" + "stats" + "?" + "platform=" + platform
             print("OW API INVOKED: ", owapicall)
             if platform == "pc":
+                await self.bot.delete_message(fetch)
                 await self.bot.say("PC is not supported. :shrug:")                 
             else:
                 async with session.get(owapicall) as console:
-                    self.api = await us.json()
+                    self.api = await console.json()
                     if 'any' in self.api:
                         await self.bot.delete_message(fetch)
                         await self.stats(ctx, username, platform)
