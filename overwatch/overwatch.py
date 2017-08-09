@@ -71,11 +71,14 @@ class Overwatch:
              + "\nGold Medals - " + str(data['stats']['quickplay']['game_stats'].get('medals_gold', []))\
              + "\nEliminations - " + str(data['stats']['quickplay']['game_stats'].get('eliminations', []))\
              + "\nBest Kill Streak - " + str(data['stats']['quickplay']['game_stats'].get('kill_streak_best', []))
-        comp = "SR - " + str(data['stats']['competitive']['overall_stats'].get('comprank', []))\
-               + "\nGames Won - " + str(data['stats']['competitive']['overall_stats'].get('wins', []))\
-               + "\nGames Lost - " + str(data['stats']['competitive']['overall_stats'].get('losses', []))\
-               + "\nGames Played - " + str(data['stats']['competitive']['overall_stats'].get('games', []))\
-               + "\nTime Played - " + str(data['stats']['competitive']['game_stats'].get('time_played', []))
+        if data['stats']['competitive']:
+               comp = "SR - " + str(data['stats']['competitive']['overall_stats'].get('comprank', []))\
+                      + "\nGames Won - " + str(data['stats']['competitive']['overall_stats'].get('wins', []))\
+                      + "\nGames Lost - " + str(data['stats']['competitive']['overall_stats'].get('losses', []))\
+                      + "\nGames Played - " + str(data['stats']['competitive']['overall_stats'].get('games', []))\
+                      + "\nTime Played - " + str(data['stats']['competitive']['game_stats'].get('time_played', []))
+        else:
+               comp = "Competitive Stats Unknown"
         em = discord.Embed(title="Overwatch Stats on " + platform.upper(),
                            colour=randint(0, 0xFFFFFF),
                            description="Rank: " + str(data['stats']['quickplay']['overall_stats']['tier']) + "\nLevel: " + str(data['stats']['quickplay']['overall_stats']['prestige']) + str(data['stats']['quickplay']['overall_stats']['level']))
