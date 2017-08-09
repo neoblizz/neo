@@ -43,8 +43,12 @@ class Overwatch:
             owapicall = url + user + "/" + "stats" + "?" + "platform=" + platform
             print("OW API INVOKED: ", owapicall)
             if platform == "pc":
-                await self.bot.delete_message(fetch)
-                await self.bot.say("PC is not supported. :shrug:")                 
+                async with session.get(owapicall) as us:
+                    self.api = await us.json()
+                    if 'us' in self.api:
+                        await self.bot.delete_message(fetch)
+                        await self.stats(ctx, username, platform)
+                        await self.bot.say("PC is not supported. :shrug:")                 
             else:
                 async with session.get(owapicall) as console:
                     self.api = await console.json()
@@ -58,7 +62,10 @@ class Overwatch:
 
     async def stats(self, ctx, username, platform):
         m = ctx.message
-        data = self.api['any']
+        if platform == "pc":
+             data = self.api['us']
+        else:
+             data = self.api['any']
         qp = "Games Won - " + str(data['stats']['quickplay']['overall_stats'].get('wins', []))\
              + "\nTime Played - " + str(data['stats']['quickplay']['game_stats'].get('time_played', []))\
              + "\nGold Medals - " + str(data['stats']['quickplay']['game_stats'].get('medals_gold', []))\
