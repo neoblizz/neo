@@ -48,7 +48,7 @@ class Overwatch:
                     if 'us' in self.api:
                         await self.bot.delete_message(fetch)
                         await self.stats(ctx, username, platform)
-                        await self.bot.say("PC is not supported. :shrug:")                 
+                        await self.bot.say("PC stats are not *fully* supported. :shrug:")                 
             else:
                 async with session.get(owapicall) as console:
                     self.api = await console.json()
@@ -58,7 +58,7 @@ class Overwatch:
                     else:
                         reminder = ""
                         await self.bot.delete_message(fetch)
-                        await self.bot.say(username + " not found. \nUser is cap-sensitive" + reminder)
+                        await self.bot.say(username + " not found. \nUser is cap-sensitive! :clap:" + reminder)
 
     async def stats(self, ctx, username, platform):
         m = ctx.message
