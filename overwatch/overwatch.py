@@ -39,8 +39,7 @@ class Overwatch:
             else:
                 await self.bot.say("Trouble reading the platform type. \n<pc/xbox/ps4> or missing quotes around name")
                 return
-            fetch = await self.bot.send_message(m.channel, "Fetching player data for " + username + "..."
-                                                + "\n*(This may take awhile)*")
+            fetch = await self.bot.send_message(m.channel, ":clipboard: Fetching player data for " + username + "...")
             owapicall = url + user + "/" + "stats" + "?" + "platform=" + platform
             print("OW API INVOKED: ", owapicall)
             async with session.get(owapicall) as us:
@@ -74,15 +73,16 @@ class Overwatch:
         m = ctx.message
         data = self.api['any']
         qp = "Wins - " + str(data['stats']['quickplay']['overall_stats'].get('wins', []))\
-             + "\nLost - " + str(data['stats']['quickplay']['overall_stats'].get('losses', []))\
-             + "\nPlayed - " + str(data['stats']['quickplay']['overall_stats'].get('games', []))
+             + "\nTime Played - " + str(data['stats']['quickplay']['game_stats'].get('time_played', []))\
+             + "\nGold Medals - " + str(data['stats']['quickplay']['game_stats'].get('medals_gold', []))
         comp = "SR - " + str(data['stats']['competitive']['overall_stats'].get('comprank', []))\
-               + "\nWins - " + str(data['stats']['competitive']['overall_stats'].get('wins', []))\
-               + "\nLost - " + str(data['stats']['competitive']['overall_stats'].get('losses', []))\
-               + "\nPlayed - " + str(data['stats']['competitive']['overall_stats'].get('games', []))
+               + "\nGames Wins - " + str(data['stats']['competitive']['overall_stats'].get('wins', []))\
+               + "\nGames Lost - " + str(data['stats']['competitive']['overall_stats'].get('losses', []))\
+               + "\nGames Played - " + str(data['stats']['competitive']['overall_stats'].get('games', []))\
+               + "\nTime Played - " + str(data['stats']['competitive']['game_stats'].get('time_played', []))
         em = discord.Embed(title="Overwatch Stats on " + platform.upper(),
                            colour=randint(0, 0xFFFFFF),
-                           description="Rank: " + str(data['stats']['quickplay']['overall_stats']['tier']) + " - Level: " + str(data['stats']['quickplay']['overall_stats']['prestige']) + str(data['stats']['quickplay']['overall_stats']['level']))
+                           description="Rank: " + str(data['stats']['quickplay']['overall_stats']['tier']) + "\nLevel: " + str(data['stats']['quickplay']['overall_stats']['prestige']) + str(data['stats']['quickplay']['overall_stats']['level']))
         em.set_thumbnail(url=str(data['stats']['quickplay']['overall_stats']['avatar']))
         em.set_author(name=username)
         em.set_footer(text="Git Gud~")
