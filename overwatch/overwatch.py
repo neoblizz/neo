@@ -42,41 +42,29 @@ class Overwatch:
             fetch = await self.bot.send_message(m.channel, ":clipboard: Fetching player data for " + username + "...")
             owapicall = url + user + "/" + "stats" + "?" + "platform=" + platform
             print("OW API INVOKED: ", owapicall)
-            async with session.get(owapicall) as us:
-                self.api = await us.json()
-                if 'any' in self.api:
-                    await self.bot.delete_message(fetch)
-                    await self.stats(ctx, username, platform)
-                else:
-                    region = "eu"
-                    async with session.get(owapicall) as eu:
-                        self.api = await eu.json()
-                        if 'any' in self.api:
-                            await self.bot.delete_message(fetch)
-                            await self.stats(ctx, username, platform)
-                        else:
-                            region = "kr"
-                            async with session.get(owapicall) as kr:
-                                self.api = await kr.json()
-                                if 'any' in self.api:
-                                    await self.bot.delete_message(fetch)
-                                    await self.stats(ctx, username, platform)
-                                else:
-                                    if platform == "pc":
-                                        reminder = " and remember to add the bnet tag"
-                                    else:
-                                        reminder = ""
-                                    await self.bot.delete_message(fetch)
-                                    await self.bot.say(username + " not found. \nUser is cap-sensitive" + reminder)
+            if platform == "pc":
+                await self.bot.say("PC is not supported. :shrug:")                 
+            else:
+                async with session.get(owapicall) as console:
+                    self.api = await us.json()
+                    if 'any' in self.api:
+                        await self.bot.delete_message(fetch)
+                        await self.stats(ctx, username, platform)
+                    else:
+                        reminder = ""
+                        await self.bot.delete_message(fetch)
+                        await self.bot.say(username + " not found. \nUser is cap-sensitive" + reminder)
 
     async def stats(self, ctx, username, platform):
         m = ctx.message
         data = self.api['any']
-        qp = "Wins - " + str(data['stats']['quickplay']['overall_stats'].get('wins', []))\
+        qp = "Games Won - " + str(data['stats']['quickplay']['overall_stats'].get('wins', []))\
              + "\nTime Played - " + str(data['stats']['quickplay']['game_stats'].get('time_played', []))\
-             + "\nGold Medals - " + str(data['stats']['quickplay']['game_stats'].get('medals_gold', []))
+             + "\nGold Medals - " + str(data['stats']['quickplay']['game_stats'].get('medals_gold', []))\
+             + "\nEliminations - " + str(data['stats']['quickplay']['game_stats'].get('eliminations', []))\
+             + "\nBest Kill Streak - " + str(data['stats']['quickplay']['game_stats'].get('kill_streak_best', []))
         comp = "SR - " + str(data['stats']['competitive']['overall_stats'].get('comprank', []))\
-               + "\nGames Wins - " + str(data['stats']['competitive']['overall_stats'].get('wins', []))\
+               + "\nGames Won - " + str(data['stats']['competitive']['overall_stats'].get('wins', []))\
                + "\nGames Lost - " + str(data['stats']['competitive']['overall_stats'].get('losses', []))\
                + "\nGames Played - " + str(data['stats']['competitive']['overall_stats'].get('games', []))\
                + "\nTime Played - " + str(data['stats']['competitive']['game_stats'].get('time_played', []))
