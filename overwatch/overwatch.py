@@ -45,10 +45,18 @@ class Overwatch:
             if platform == "pc":
                 async with session.get(owapicall) as us:
                     self.api = await us.json()
-                    if 'us' in self.api:
+                    if not (self.api['us'] == "null"):
                         await self.bot.delete_message(fetch)
-                        await self.stats(ctx, username, platform)
-                        await self.bot.say("PC stats are not *fully* supported. :shrug:")                 
+                        await self.stats(ctx, username, platform, region)
+                    elif not (self.api['eu'] == "null"):
+                        region = "eu"
+                        await self.bot.delete_message(fetch)
+                        await self.stats(ctx, username, platform, region)
+                    else:
+                        region = "kr"
+                        await self.bot.delete_message(fetch)
+                        await self.stats(ctx, username, platform, region)
+                    await self.bot.say("PC stats are not *fully* supported. :shrug:")                 
             else:
                 async with session.get(owapicall) as console:
                     self.api = await console.json()
@@ -60,10 +68,15 @@ class Overwatch:
                         await self.bot.delete_message(fetch)
                         await self.bot.say(username + " not found. \nUser is cap-sensitive! :clap:" + reminder)
 
-    async def stats(self, ctx, username, platform):
+    async def stats(self, ctx, username, platform, region="us"):
         m = ctx.message
         if platform == "pc":
-             data = self.api['us']
+             if region == "us":
+                 data = self.api['us']
+             elif region == "eu":
+                 data = self.api['eu']
+             else:
+                 data = self.api['kr']
         else:
              data = self.api['any']
         qp = "Games Won - " + str(data['stats']['quickplay']['overall_stats'].get('wins', []))\
