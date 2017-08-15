@@ -22,7 +22,7 @@ class Rules:
         data.add_field(name="Mentions:", value="Don’t abuse mentions or you will lose your ability to mention.", inline=False)
         data.add_field(name="Arguing:", value="DO NOT argue with staff. This will get you nowhere. If you have a disagreement with a staff member, contact an Admin by DM and respectfully explain your situation. Absolutely do not take things out of context as the Admin will get both sides of the story.", inline=False)
         data.add_field(name="Complaints:", value="If there are repeated complaints about you (within reason), action will be taken.", inline=False)
-        data.add_field(name="", value="If you feel if any of these rules have been broken, please get in touch with an Admin or Mod ASAP.", inline=False)
+        data.add_field(name="<3", value="If you feel if any of these rules have been broken, please get in touch with an Admin or Mod ASAP.", inline=False)
         await self.bot.say(embed=data)        
 
 def setup(bot):
